@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "board")
+@ToString(exclude = "meditation")
 public class Reply extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,5 +18,5 @@ public class Reply extends BaseEntity {
     private String replyer;
 
     @ManyToOne // 연관관계 지정
-    private Board board;
+    private Meditation meditation;
 }
