@@ -2,6 +2,7 @@ package kr.ac.kopo.webproject.repository;
 
 import kr.ac.kopo.webproject.entity.Board;
 import kr.ac.kopo.webproject.entity.Notice;
+import kr.ac.kopo.webproject.repository.search.SearchNoticeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface NoticeRepository extends JpaRepository<Notice, Long> {
+public interface NoticeRepository extends JpaRepository<Notice, Long>, SearchNoticeRepository {
     @Query("select n, w from Notice n left join n.writer w where n.nno=:nno")
     Object getNoticeWithWriter(@Param("nno") Long nno);
 

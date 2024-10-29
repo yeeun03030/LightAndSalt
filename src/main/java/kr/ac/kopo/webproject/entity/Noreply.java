@@ -17,6 +17,6 @@ public class Noreply extends BaseEntity {
     private String text;
     private String replyer;
 
-    @ManyToOne // 연관관계 지정
+    @ManyToOne(fetch = FetchType.LAZY) // 연관관계 지정
     private Notice notice;
 }

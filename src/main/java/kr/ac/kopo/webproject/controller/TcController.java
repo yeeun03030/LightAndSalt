@@ -45,14 +45,6 @@ public class TcController {
 
     @PostMapping("/signup")
     public String signup(MemberDTO dto, RedirectAttributes redirectAttributes) {
-//        MemberDTO memberDTO = MemberDTO.builder()
-//                .email(dto.getEmail())
-//                .username(dto.getUsername())
-//                .role(dto.getRole())
-//                .password(dto.getPassword())
-//                .phoneNumber(dto.getPhoneNumber())
-//                .address(dto.getAddress())
-//                .build();
 
         Member email = memberService.register(dto);
 
@@ -107,7 +99,6 @@ public class TcController {
                                 RedirectAttributes redirectAttributes) {
         log.info(dto);
         Boolean result = noticeService.modify(dto);
-        // Integer result =
 
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("type", requestDTO.getType());
@@ -133,19 +124,18 @@ public class TcController {
         return "redirect:/tc/notice";
     }
 
-    @GetMapping("/meditation")
-    public void meditation() {
-    }
+//    @GetMapping("/meditation")
+//    public void meditation() {
+//    }
 
     @GetMapping("/{nno}")
     public ResponseEntity<Notice> getNoticePost(@PathVariable Long nno) {
         Notice notice = noticeService.incrementVisitorCount(nno); // 방문자 수 증가
-//        Notice notice = postRepository.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("Notice Post not found"));
+
         return ResponseEntity.ok(notice);
     }
 
-    @GetMapping("/light_and_salt")
-    public void light_and_salt() {
-    }
+//    @GetMapping("/light_and_salt")
+//    public void light_and_salt() {
+//    }
 }
