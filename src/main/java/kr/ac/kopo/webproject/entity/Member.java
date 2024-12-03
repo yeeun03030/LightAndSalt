@@ -1,11 +1,12 @@
 package kr.ac.kopo.webproject.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -21,9 +22,15 @@ public class Member extends BaseEntity {
 
     private String username;
 
-    private String phoneNumber;
-
     private String address;
 
-    private Integer role;
+    private boolean fromSocial;
+
+    @ElementCollection
+    @Builder.Default
+    private Set<MemberRole> roleSet = new HashSet<>();
+
+    public void addMemberRole(MemberRole memberRole) {
+        roleSet.add(memberRole);
+    }
 }

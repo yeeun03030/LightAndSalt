@@ -1,6 +1,5 @@
 package kr.ac.kopo.webproject.service;
 
-import kr.ac.kopo.webproject.dto.BoardDTO;
 import kr.ac.kopo.webproject.dto.NoticeDTO;
 import kr.ac.kopo.webproject.dto.PageRequestDTO;
 import kr.ac.kopo.webproject.dto.PageResultDTO;
@@ -31,8 +30,6 @@ public interface NoticeService {
                 .topic(notice.getTopic())
                 .writerEmail(member.getEmail())
                 .writerName(member.getUsername())
-                .writerRole(member.getRole())
-                .writerPassword(member.getPassword())
                 .replyCount(replyCount.intValue())
                 .visitorCount(notice.getVisitorCount())
                 .build();
@@ -44,8 +41,6 @@ public interface NoticeService {
         Member member = Member.builder()
                 .email(dto.getWriterEmail())
                 .username(dto.getWriterName())
-                .role(dto.getWriterRole())
-                .password(dto.getWriterPassword())
                 .build();
 
         Notice notice = Notice.builder()

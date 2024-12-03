@@ -1,22 +1,27 @@
 package kr.ac.kopo.webproject.dto;
 
-import jakarta.persistence.Id;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
-import java.time.LocalDateTime;
+import java.util.Collection;
 
-@Data
+@Log4j2
+@Getter
+@Setter
 @ToString
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class MemberDTO {
+public class MemberDTO extends User {
     private String email;
-    private String password;
-    private String username;
-    private String phoneNumber;
+    private String name;
+    private boolean fromSocial;
     private String address;
-    private Integer role;
-    private LocalDateTime regDate;
-    private LocalDateTime modDate;
+
+    public MemberDTO(String username, String password, boolean fromSocial, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
+        this.email = username;
+        this.fromSocial = fromSocial;
+    }
 }

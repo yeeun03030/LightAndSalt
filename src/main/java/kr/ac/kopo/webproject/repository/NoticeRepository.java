@@ -1,6 +1,5 @@
 package kr.ac.kopo.webproject.repository;
 
-import kr.ac.kopo.webproject.entity.Board;
 import kr.ac.kopo.webproject.entity.Notice;
 import kr.ac.kopo.webproject.repository.search.SearchNoticeRepository;
 import org.springframework.data.domain.Page;

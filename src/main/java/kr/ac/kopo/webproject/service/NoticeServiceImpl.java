@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import kr.ac.kopo.webproject.dto.NoticeDTO;
 import kr.ac.kopo.webproject.dto.PageRequestDTO;
 import kr.ac.kopo.webproject.dto.PageResultDTO;
-import kr.ac.kopo.webproject.entity.Board;
 import kr.ac.kopo.webproject.entity.Member;
 import kr.ac.kopo.webproject.entity.Notice;
 import kr.ac.kopo.webproject.repository.MemberRepository;
@@ -26,30 +25,20 @@ import java.util.function.Function;
 public class NoticeServiceImpl implements NoticeService {
     private final NoticeRepository repository;
     private final NoreplyRepository replyRepository;
-    private final MemberRepository memberRepository;
 
     @Override
     public Long register(NoticeDTO dto) {
         Notice notice = noticeDtoToEntity(dto);
-        Optional<Member> member = memberRepository.findById(notice.getWriter().getEmail());
 
-        if (member.get().getRole() == 1) {
-            repository.save(notice);
+        repository.save(notice);
 
-            return notice.getNno();
-        }
-
-        return -1L;
+        return notice.getNno();
     }
 
     @Override
     public PageResultDTO<NoticeDTO, Object[]> getList(PageRequestDTO requestDTO) {
         Function<Object[], NoticeDTO> fn = (en ->
                 noticeEntityToDto((Notice) en[0], (Member)en[1], (Long)en[2])); // <처리될 매개변수의 전달될 값, 반환될 자료형>
-
-//        Page<Object[]> result = repository.getNoticeWithNoreplyCount(
-//                requestDTO.getPageable(Sort.by("nno").descending())
-//        );
 
         Page<Object[]> result = repository.searchPage(
                 requestDTO.getType(),
